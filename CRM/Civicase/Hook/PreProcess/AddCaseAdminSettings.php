@@ -25,6 +25,8 @@ class CRM_Civicase_Hook_PreProcess_AddCaseAdminSettings {
 
     $this->addCivicaseSettingsToForm($settings);
     $form->setVar('_settings', $settings);
+
+    $this->addScriptFile();
   }
 
   /**
@@ -43,6 +45,17 @@ class CRM_Civicase_Hook_PreProcess_AddCaseAdminSettings {
     foreach ($settingKeys as $settingKey) {
       $settings[$settingKey] = CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME;
     }
+  }
+
+  /**
+   * Adds a custom JS file to the Civicase settings admin form.
+   *
+   * This JS file handles custom logic needed to display or hide certain
+   * fields in the admin form.
+   */
+  private function addScriptFile() {
+    CRM_Core_Resources::singleton()
+      ->addScriptFile('uk.co.compucorp.civicase', 'js/civicase-settings-form.js');
   }
 
   /**
