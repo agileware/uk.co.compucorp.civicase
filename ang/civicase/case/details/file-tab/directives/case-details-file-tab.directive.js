@@ -114,9 +114,7 @@
     function refresh (apiCalls) {
       if (!_.isArray(apiCalls)) apiCalls = [];
 
-      crmApi(apiCalls, true).then(function (result) {
-        $scope.fileLists.refresh();
-      });
+      crmApi(apiCalls, true).then(loadActivities);
     }
 
     /**
