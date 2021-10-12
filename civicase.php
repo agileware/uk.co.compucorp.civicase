@@ -200,15 +200,6 @@ function civicase_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 /**
- * Implements hook_civicrm_coreResourceList().
- */
-function civicase_civicrm_coreResourceList(&$items, $region) {
-  if ($region == 'html-header') {
-    CRM_Core_Resources::singleton()->addScriptFile('uk.co.compucorp.civicase', 'js/close-pdf-form.js');
-  }
-}
-
-/**
  * Implements hook_civicrm_buildForm().
  */
 function civicase_civicrm_buildForm($formName, &$form) {
@@ -232,6 +223,9 @@ function civicase_civicrm_buildForm($formName, &$form) {
     new CRM_Civicase_Hook_BuildForm_LinkCaseActivityDefaultStatus(),
     new CRM_Civicase_Hook_BuildForm_HandleDraftActivities(),
     new CRM_Civicase_Hook_BuildForm_AddCaseCategoryCustomFields(),
+    new CRM_Civicase_Hook_BuildForm_MakePdfFormSubjectRequired(),
+    new CRM_Civicase_Hook_BuildForm_PdfFormButtonsLabelChange(),
+    new CRM_Civicase_Hook_BuildForm_AddScriptToCreatePdfForm(),
   ];
 
   foreach ($hooks as $hook) {
