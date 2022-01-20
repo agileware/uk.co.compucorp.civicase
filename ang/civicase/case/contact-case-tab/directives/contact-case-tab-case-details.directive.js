@@ -39,8 +39,7 @@
     function getCaseDetailsUrl (caseItem) {
       var caseTypeCategoryId = caseItem['case_type_id.case_type_category'];
 
-      return civicaseCrmUrl('civicrm/case/a/', 'case_type_category=' + caseTypeCategoryId +
-        '#/case/list?caseId=' + caseItem.id + '&focus=1&all_statuses=1');
+      return civicaseCrmUrl('civicrm/case/a/', 'case_type_category=' + caseTypeCategoryId + '#/case/list?cf={"case_type_category":' + caseTypeCategoryId +',"id":' + caseItem.id + '}&caseId=' + caseItem.id);
     }
   }
 })(angular, CRM.$, CRM._);
