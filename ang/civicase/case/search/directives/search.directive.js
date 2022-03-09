@@ -126,7 +126,6 @@
       $scope.$bindToRoute({ expr: 'expanded', param: 'sx', format: 'bool', default: false });
       $scope.$bindToRoute({ expr: 'filters', param: 'cf', default: {} });
       $scope.$bindToRoute({ expr: 'contactRoleFilter', param: 'crf', default: $scope.contactRoleFilter });
-      $scope.$bindToRoute({ expr: 'showCasesFromAllStatuses', param: 'all_statuses', format: 'bool' });
     }
 
     /**
@@ -344,11 +343,11 @@
     function focusSpecificCase (event, data) {
       var caseTypeCategory = $scope.filters.case_type_category;
 
-      $window.location.href =
+      $window.location.href = CRM.url('civicrm/case/a/?' +
         'case_type_category=' + caseTypeCategory +
         '#/case/list?caseId=' + data.caseId +
-        '&all_statuses=1' +
-        '&cf=%7B"case_type_category":"' + caseTypeCategory + '"%7D';
+        '&cf=%7B"case_type_category":"' + caseTypeCategory + '"%7D'
+      );
     }
 
     /**
@@ -479,7 +478,7 @@
           ? CaseType.getTitlesForNames(filters.case_type_id)
           : [];
 
-        $scope.pageTitle = status.join(' & ') + ' ' + types.join(' & ') + ' ' + ts('Cases');
+        $scope.pageTitle = ts('Cases'); // SYMBIOTIC: difficult to translate, not particularly useful: + status.join(' & ') + ' ' + types.join(' & ') + ' ' + ts('Cases');
       }
 
       if (hasTotalCount) {
