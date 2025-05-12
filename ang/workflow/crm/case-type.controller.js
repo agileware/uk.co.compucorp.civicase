@@ -52,7 +52,7 @@
       if ($scope.caseType.id) {
         $window.location.href = getUrlToManageWorkflowPage($scope.caseType.case_type_category);
       } else {
-        $window.location.href = '/civicrm/a/#/caseType';
+        $window.location.href = CRM.url('/civicrm/a/#/caseType');
       }
     }
 
@@ -85,11 +85,11 @@
     }
 
     /**
-     * @param {string} caseTypeCategoryId case type category id
      * @returns {string} url
+     * @param case_type_category
      */
-    function getUrlToManageWorkflowPage (caseTypeCategoryId) {
-      return '/civicrm/workflow/a?case_type_category=' + caseTypeCategoryId + '#/list';
+    function getUrlToManageWorkflowPage (case_type_category) {
+      return CRM.url('/civicrm/workflow/a#/list', { case_type_category });
     }
   }
 })(CRM.$, CRM._, angular);
