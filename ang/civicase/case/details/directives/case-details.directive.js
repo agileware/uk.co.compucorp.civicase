@@ -185,7 +185,7 @@
      * @returns {string} the formatted date
      */
     function formatDate (date, format) {
-      moment.locale('fr');
+      moment.locale(CRM?.config.locale?.substring(0, 2) ?? 'en');
       return moment(date).format(format);
     }
 

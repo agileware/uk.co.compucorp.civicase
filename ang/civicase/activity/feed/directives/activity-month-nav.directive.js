@@ -168,7 +168,7 @@
         isOverDueGroup: !!isOverDueGroup,
         month: dateObject.month,
         year: dateObject.year,
-        monthName: moment(dateObject.month, 'MM').locale('fr').format('MMMM')
+        monthName: moment(dateObject.month, 'MM').locale(CRM?.config.locale?.substring(0, 2) ?? 'en').format('MMMM')
       };
 
       if (yearObject) {
