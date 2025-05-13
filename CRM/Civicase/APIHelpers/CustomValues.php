@@ -10,8 +10,10 @@ class CRM_Civicase_APIHelpers_CustomValues {
    *
    * @param array $spec
    *   Specs as passed by CiviCRM to the spec hook function.
+   *
+   * @throws \CRM_Core_Exception
    */
-  public static function getTreeValuesSpecs(array &$spec) {
+  public static function getTreeValuesSpecs(array &$spec): void {
     $spec['entity_id'] = [
       'title' => 'Entity Id',
       'description' => 'Id of entity',
@@ -20,7 +22,7 @@ class CRM_Civicase_APIHelpers_CustomValues {
     ];
 
     $entities = civicrm_api3('Entity', 'get');
-    $entities = array_diff($entities['values'], $entities['deprecated']);
+    $entities = array_diff($entities['values'] ?? [], $entities['deprecated'] ?? []);
     $spec['entity_type'] = [
       'title' => 'Entity Type',
       'description' => 'API name of entity type, e.g. "Contact"',
