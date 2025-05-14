@@ -172,47 +172,6 @@ class CRM_Civicase_Angular {
         'is_write_action' => FALSE,
       ];
     }
-
-    self::add_webforms_case_action();
-  }
-
-  /**
-   * Add webforms with cases attached to menu.
-   */
-  public static function add_webforms_case_action() {
-    $items = [];
-
-    $webformsToDisplay = Civi::settings()->get('civi_drupal_webforms');
-    if (isset($webformsToDisplay)) {
-      $allowedWebforms = [];
-      foreach ($webformsToDisplay as $webformNode) {
-        $allowedWebforms[] = $webformNode['nid'];
-      }
-      $webforms = civicrm_api3('Case', 'getwebforms');
-      if (isset($webforms['values'])) {
-        foreach ($webforms['values'] as $webform) {
-          if (!in_array($webform['nid'], $allowedWebforms)) {
-            continue;
-          }
-
-          $items[] = [
-            'title'           => $webform['title'],
-            'action'          => 'GoToWebform',
-            'path'            => $webform['path'],
-            'case_type_ids'   => $webform['case_type_ids'],
-            'clientID'        => NULL,
-            'is_write_action' => FALSE,
-          ];
-        }
-        self::$options['caseActions'][] = [
-          'title'           => ts('Forms'),
-          'action'          => 'Forms',
-          'icon'            => 'fa-file-text-o',
-          'items'           => $items,
-          'is_write_action' => FALSE,
-        ];
-      }
-    }
   }
 
   /**

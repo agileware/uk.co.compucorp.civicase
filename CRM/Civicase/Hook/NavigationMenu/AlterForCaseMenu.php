@@ -28,7 +28,6 @@ class CRM_Civicase_Hook_NavigationMenu_AlterForCaseMenu {
   public function run(array &$menu) {
     $this->caseCategorySetting = new CaseCategorySetting();
     $this->rewriteCaseUrls($menu);
-    $this->addCaseWebformUrl($menu);
   }
 
   /**
@@ -55,45 +54,6 @@ class CRM_Civicase_Hook_NavigationMenu_AlterForCaseMenu {
         return;
       }
     });
-  }
-
-  /**
-   * Adds the civicase Webform menu to the Adminsiter Civicase Menu.
-   *
-   * @param array $menu
-   *   Menu Array.
-   */
-  private function addCaseWebformUrl(array &$menu) {
-    // Add new menu item
-    // Check that our item doesn't already exist.
-    $menu_item_search = ['url' => 'civicrm/case/webforms'];
-    $menu_items = [];
-    CRM_Core_BAO_Navigation::retrieve($menu_item_search, $menu_items);
-
-    if (!empty($menu_items)) {
-      return;
-    }
-
-    $navId = CRM_Core_DAO::singleValueQuery("SELECT max(id) FROM civicrm_navigation");
-    if (is_int($navId)) {
-      $navId++;
-    }
-    // Find the Civicase menu.
-    $caseID = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_Navigation', 'CiviCase', 'id', 'name');
-    $administerID = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_Navigation', 'Administer', 'id', 'name');
-    $menu[$administerID]['child'][$caseID]['child'][$navId] = [
-      'attributes' => [
-        'label' => ts('CiviCase Webforms'),
-        'name' => 'CiviCase Webforms',
-        'url' => 'civicrm/case/webforms',
-        'permission' => 'access all cases and activities',
-        'operator' => 'OR',
-        'separator' => 1,
-        'parentID' => $caseID,
-        'navID' => $navId,
-        'active' => 1,
-      ],
-    ];
   }
 
   /**

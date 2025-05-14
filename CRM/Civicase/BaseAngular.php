@@ -27,7 +27,6 @@ class CRM_Civicase_BaseAngular {
     ];
 
     CRM_Civicase_Helper_OptionValues::setToJsVariables(self::$options);
-    CRM_Civicase_Helper_NewCaseWebform::addWebformDataToOptions(self::$options, $caseCategorySetting);
     self::set_case_types_to_js_vars();
     self::set_case_category_instance_to_js_vars();
     self::set_relationship_types_to_js_vars();
@@ -95,10 +94,6 @@ class CRM_Civicase_BaseAngular {
       ->get('civicaseAllowCaseLocks');
     self::$options['allowLinkedCasesTab']                            = (bool) Civi::settings()
       ->get('civicaseAllowLinkedCasesTab');
-    self::$options['showWebformsListSeparately']                     = (bool) Civi::settings()
-      ->get('civicaseShowWebformsListSeparately');
-    self::$options['webformsDropdownButtonLabel']                    = Civi::settings()
-      ->get('civicaseWebformsDropdownButtonLabel');
     self::$options['showFullContactNameOnActivityFeed']              = (bool) Civi::settings()
       ->get('showFullContactNameOnActivityFeed');
     self::$options['includeActivitiesForInvolvedContact']            = (bool) Civi::settings()

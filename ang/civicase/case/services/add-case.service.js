@@ -7,30 +7,21 @@
    * Add Case Service
    *
    * @param {object} $window the window service.
-   * @param {string} CaseCategoryWebformSettings service to fetch case category webform settings
    * @param {Function} civicaseCrmUrl crm url service.
    * @param {Function} civicaseCrmLoadForm service to load civicrm forms
    * @param {object} CaseTypeCategory case type category service
    */
-  function AddCaseService ($window, CaseCategoryWebformSettings, civicaseCrmUrl,
-    civicaseCrmLoadForm, CaseTypeCategory) {
+  function AddCaseService ($window,  civicaseCrmUrl, civicaseCrmLoadForm, CaseTypeCategory) {
     this.clickHandler = clickHandler;
     this.isVisible = isVisible;
 
     /**
-     * Displays a form to add a new case. If a custom "Add Case" webform url has been configured,
-     * it will redirect to it. Otherwise it will open a CRM form popup to add a new case.
+     * Displays a form to add a new case.
      *
      * @param {addCaseConfig} params parameters
      */
     function clickHandler (params) {
-      var caseTypeCategoryName = CaseTypeCategory.findById(params.caseTypeCategoryId).name;
-      var webformSettings = CaseCategoryWebformSettings.getSettingsFor(caseTypeCategoryName);
-      var hasCustomNewCaseWebformUrl = !!webformSettings.newCaseWebformUrl;
-
-      hasCustomNewCaseWebformUrl
-        ? redirectToCustomNewCaseWebformUrl(webformSettings, params.contactId)
-        : openNewCaseForm(params);
+      openNewCaseForm(params);
     }
 
     /**
@@ -66,22 +57,6 @@
 
       civicaseCrmLoadForm(formUrl)
         .on('crmFormSuccess crmPopupFormSuccess', params.callbackFn);
-    }
-
-    /**
-     * Redirects the user to the custom webform URL as defined in the configuration.
-     *
-     * @param {string} webformSettings web form settings
-     * @param {string} contactId contact id
-     */
-    function redirectToCustomNewCaseWebformUrl (webformSettings, contactId) {
-      var url = webformSettings.newCaseWebformUrl;
-
-      if (contactId) {
-        url += '?' + webformSettings.newCaseWebformClient + '=' + contactId;
-      }
-
-      $window.location.href = url;
     }
 
     /**

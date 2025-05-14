@@ -70,14 +70,6 @@ $civicase-webform-dropdown-max-width: 500px;
   }
 }
 
-.civicase__case-header__webform-dropdown {
-  /* stylelint-disable selector-max-compound-selectors */
-  +.dropdown-menu > li a {
-    max-width: $civicase-webform-dropdown-max-width !important;
-  }
-  /* stylelint-enable selector-max-compound-selectors */
-}
-
 .civicase__case-header__content__first-row {
   display: flex;
   min-height: 42px;

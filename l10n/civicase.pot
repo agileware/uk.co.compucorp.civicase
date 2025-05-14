@@ -1582,14 +1582,6 @@ msgstr ""
 msgid "No contacts available for selected role(s)"
 msgstr ""
 
-#: ./ang/civicase/case/actions/services/go-to-webform-case-action.service.js ./ang/test/civicase/case/actions/services/go-to-webforms-case-action.service.spec.js
-msgid "Please refresh this page to view updates from the webform submission."
-msgstr ""
-
-#: ./ang/civicase/case/actions/services/go-to-webform-case-action.service.js ./ang/test/civicase/case/actions/services/go-to-webforms-case-action.service.spec.js
-msgid "Refresh"
-msgstr ""
-
 #: ./ang/civicase/case/actions/services/merge-cases-case-action.service.js
 msgid "Merge all activity records into a single case?"
 msgstr ""

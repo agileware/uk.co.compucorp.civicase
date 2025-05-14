@@ -60,45 +60,6 @@ $setting = [
     'description' => E::ts('This will allow linked cases to be viewed on a separate tab.'),
     'help_text' => '',
   ],
-  'civicaseShowWebformsListSeparately' => [
-    'group_name' => 'CiviCRM Preferences',
-    'group' => 'core',
-    'name' => 'civicaseShowWebformsListSeparately',
-    'type' => 'Boolean',
-    'quick_form_type' => 'YesNo',
-    'default' => FALSE,
-    'html_attributes' => [
-      'data-toggles-visibility-for' => 'civicase__settings__webform-button-label',
-      'class' => 'civicase__settings__show-webform',
-    ],
-    'html_type' => 'radio',
-    'add' => '4.7',
-    'title' => E::ts('Show Webforms list in a separate dropdown'),
-    'is_domain' => 1,
-    'is_contact' => 0,
-    'description' => E::ts('This will show the webforms list in a separate dropdown.'),
-    'help_text' => '',
-  ],
-  'civicaseWebformsDropdownButtonLabel' => [
-    'group_name' => 'CiviCRM Preferences',
-    'group' => 'core',
-    'name' => 'civicaseWebformsDropdownButtonLabel',
-    'type' => 'String',
-    'quick_form_type' => 'Element',
-    'html_attributes' => [
-      'class' => 'civicase__settings__webform-button-label',
-      'size' => 20,
-      'maxlength' => 20,
-    ],
-    'html_type' => 'text',
-    'default' => 'Webforms',
-    'add' => '4.7',
-    'title' => E::ts('Label for the Webforms dropdown button'),
-    'is_domain' => 1,
-    'is_contact' => 0,
-    'description' => E::ts('Label for the Webforms dropdown button'),
-    'help_text' => '',
-  ],
   'showFullContactNameOnActivityFeed' => [
     'group_name' => 'CiviCRM Preferences',
     'group' => 'core',
@@ -182,7 +143,4 @@ $setting = [
   ],
 ];
 
-$caseSetting = new CRM_Civicase_Service_CaseCategorySetting();
-$caseCategoryWebFormSetting = $caseSetting->getForWebform();
-
-return array_merge($setting, $caseCategoryWebFormSetting);
+return $setting;
