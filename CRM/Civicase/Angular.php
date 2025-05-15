@@ -13,7 +13,6 @@ class CRM_Civicase_Angular {
    * @throws \Exception
    */
   public static function getOptions(): array {
-    self::load_resources();
     [$caseCategoryId, $caseCategoryName] = CRM_Civicase_Helper_CaseUrl::getCategoryParamsFromUrl();
 
     // Word replacements are already loaded for the contact tab ContactCaseTab.
@@ -34,7 +33,6 @@ class CRM_Civicase_Angular {
 
     // The following changes are only relevant to the full-page app.
     if (CRM_Utils_System::currentPath() == 'civicrm/case/a') {
-      self::adds_shoreditch_css();
       \CRM_Civicase_Helper_CaseCategory::updateBreadcrumbs($caseCategoryId);
     }
 
@@ -42,30 +40,6 @@ class CRM_Civicase_Angular {
     self::set_contact_tasks();
 
     return self::$options;
-  }
-
-  /**
-   * Loads Resources.
-   */
-  public static function load_resources() {
-    Civi::resources()
-      ->addScriptFile('org.civicrm.shoreditch', 'base/js/affix.js', 1000, 'html-header')
-      ->addSetting([
-        'config' => [
-          'enableComponents' => CRM_Core_Config::singleton()->enableComponents,
-          'user_contact_id'  => (int) CRM_Core_Session::getLoggedInContactID(),
-        ],
-      ]);
-  }
-
-  /**
-   * Add shoreditch custom css if not already present.
-   */
-  public static function adds_shoreditch_css() {
-    if (!civicrm_api3('Setting', 'getvalue', ['name' => "customCSSURL"])) {
-      Civi::resources()
-        ->addStyleFile('org.civicrm.shoreditch', 'css/custom-civicrm.css', 99, 'html-header');
-    }
   }
 
   /**

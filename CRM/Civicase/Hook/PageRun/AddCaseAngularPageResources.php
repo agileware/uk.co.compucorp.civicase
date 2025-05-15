@@ -24,13 +24,23 @@ class CRM_Civicase_Hook_PageRun_AddCaseAngularPageResources {
    */
   private function addResources() {
     // Adds Moment.js file.
-    CRM_Core_Resources::singleton()
+    Civi::resources()
       ->addScriptFile('uk.co.compucorp.civicase', 'packages/moment-with-locales.min.js');
     // Adds simplescrollbarjs.
-    CRM_Core_Resources::singleton()
+    Civi::resources()
       ->addScriptFile('uk.co.compucorp.civicase', 'packages/simplebar.min.js');
-    CRM_Core_Resources::singleton()
+    Civi::resources()
       ->addStyleFile('uk.co.compucorp.civicase', 'packages/simplebar.min.css', 1000, 'html-header');
+    Civi::resources()
+        ->addScriptFile('org.civicrm.shoreditch', 'base/js/affix.js', 1000, 'html-header')
+        ->addSetting([
+          'config' => [
+            'enableComponents' => CRM_Core_Config::singleton()->enableComponents,
+            'user_contact_id'  => (int) CRM_Core_Session::getLoggedInContactID(),
+          ],
+        ]);
+    Civi::resources()
+        ->addStyleFile('org.civicrm.shoreditch', 'css/custom-civicrm.css', 99, 'html-header');
   }
 
   /**
